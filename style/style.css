@@ -1,0 +1,114 @@
+body {
+  background: url("/images/geometric.jpg");
+  padding-top: 20px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.time-slider {
+  width: 600px;
+}
+
+.time-slider-wrapper {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 480;
+}
+
+.time-slider-slider,
+.booking-status-bar-bar {
+  position: absolute;
+  top: 0;
+}
+
+.time-slider-slider {
+  margin-left: 15px;
+}
+
+.time-slider-slider {
+  top: 4px;
+  left: 15px;
+}
+
+.booking-status-bar-bar {
+  left: 15px;
+}
+
+.booking-status-bar {
+  /*left: 0;
+  top: 0;*/
+}
+
+.booking-status-bar .bar {
+  /*margin-left: 15px;*/
+}
+
+/* Slider styling */
+.horizontal-slider {
+  width: 482px;
+  height: 20px;
+}
+.handle {
+  font-size: 0.9em;
+  text-align: center;
+  margin-top: 15px;
+  background-color: #00a0db;
+  color: white;
+  cursor: pointer;
+}
+.handle.active {
+  background-color: grey;
+}
+
+.horizontal-slider .bar {
+  top: 20px;
+  height: 10px;
+}
+
+.horizontal-slider .handle {
+  top: 1px;
+  width: 2px;
+  height: 20px;
+  line-height: 20px;
+}
+
+ul.room-list {
+  list-style: none;
+}
+
+ul.room-list li {
+  border: 1px solid grey;
+  margin: 0 0 10px 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.room-list div.room-key-details {
+  /*background-color: #9abd36;
+  color: white;*/
+}
+
+.section-container h3 {
+  background-color: black;
+  color: white;
+  font-weight: 300;
+  padding: 10px;
+  margin: 0;
+}
+
+.section-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding-bottom: 20px;
+}
+
+.room-filter form {
+  border: 1px solid grey;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+}
