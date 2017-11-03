@@ -1,35 +1,49 @@
 import React from "react";
+import { Field, reduxForm } from "redux-form";
+
+export const initialState = {
+  room_filter_name: "",
+  room_filter_attendees: "",
+  room_filter_available_only: false
+};
 
 class RoomFilter extends React.Component {
   render() {
     return (
-      <div className="room-filter col-md-3">
-        <h4>FILTER</h4>
+      <div className="room-filter col-md-2">
+        <h4>
+          <span className="glyphicon glyphicon-search" /> FILTER
+        </h4>
         <form>
           <div className="form-group">
             <label htmlFor="room_filter_name">Room Name</label>
-            <input
-              id="room_filter_name"
+            <Field
+              type="text"
+              component="input"
+              name="room_filter_name"
               className="form-control"
               placeholder="Filter by name..."
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="room_filter_attendees">Attendees</label>
-            <select className="form-control" id="room_filter_attendees">
-              <option>2+</option>
-              <option>3+</option>
-              <option>4+</option>
-              <option>5+</option>
-              <option>6+</option>
-              <option>7+</option>
-              <option>8+</option>
-            </select>
+            <label htmlFor="room_filter_attendees">Capacity</label>
+            <Field
+              type="number"
+              min="2"
+              component="input"
+              className="form-control"
+              name="room_filter_attendees"
+            />
           </div>
           <div className="checkbox">
             <label>
-              <input type="checkbox" /> Available now
+              <Field
+                name="room_filter_available_only"
+                component="input"
+                type="checkbox"
+              />{" "}
+              Available now
             </label>
           </div>
         </form>
@@ -38,4 +52,8 @@ class RoomFilter extends React.Component {
   }
 }
 
-export default RoomFilter;
+export default reduxForm({
+  // a unique name for the form
+  initialValues: initialState,
+  form: "roomfilter"
+})(RoomFilter);

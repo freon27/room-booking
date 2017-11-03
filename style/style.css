@@ -41,12 +41,7 @@ body {
 }
 
 .booking-status-bar {
-  /*left: 0;
-  top: 0;*/
-}
-
-.booking-status-bar .bar {
-  /*margin-left: 15px;*/
+  height: 40px;
 }
 
 /* Slider styling */
@@ -78,22 +73,6 @@ body {
   line-height: 20px;
 }
 
-ul.room-list {
-  list-style: none;
-}
-
-ul.room-list li {
-  border: 1px solid grey;
-  margin: 0 0 10px 10px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.room-list div.room-key-details {
-  /*background-color: #9abd36;
-  color: white;*/
-}
-
 .section-container h3 {
   background-color: black;
   color: white;
@@ -107,8 +86,46 @@ ul.room-list li {
   padding-bottom: 20px;
 }
 
+.section-inner {
+  margin-top: 40px;
+  /*/background: rgba(255, 255, 255, 0.95);*/
+  padding: 0;
+}
+
+.section-inner p {
+  padding: 8px;
+}
+
 .room-filter form {
   border: 1px solid grey;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.85);
   padding: 10px;
+}
+
+.section-container {
+  min-height: 500px;
+}
+
+.section-container th {
+  background-color: black;
+  color: white;
+  font-weight: 300;
+}
+
+.section-container table {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+td.numeric {
+  text-align: center;
+}
+
+td.primary strong {
+  color: #e40274;
+}
+
+td.booking-status {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

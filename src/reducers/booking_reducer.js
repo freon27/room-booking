@@ -13,7 +13,6 @@ export default function(state = { roomList: [] }, action) {
       };
       break;
     case FETCH_ROOM_LIST_SUCCESS:
-      console.log(action.payload.data);
       return {
         ...state,
         roomList: state.roomList.concat(action.payload.data),

@@ -8,14 +8,13 @@ import {
 import BookingBarLabels from "./booking_bar_labels";
 
 const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
-  //TODO: remove me
-  availableSlots = [0, 1, 4, 5, 6];
+  availableSlots = availableSlots || [];
   selectedSlots = selectedSlots || [];
 
   const blockCount =
     (BOOKABLE_END_TIME - BOOKABLE_START_TIME) / MIN_BOOKABLE_SLOT;
   let blocks = [];
-  const BLOCK_WIDTH = 10;
+  const BLOCK_WIDTH = 8;
   const BAR_PADDING = 15;
 
   // Build initial block showing all as red
@@ -83,15 +82,16 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
   }
 
   // Time labels
-  for (var i = 0; i <= 12; i++) {
+  for (var i = 0; i <= 12; i += 2) {
     blocks.push(
       <text
         x={i * BLOCK_WIDTH * 4 + BAR_PADDING}
-        y="15"
+        y="12"
+        fill="grey"
         style={{
           fontSize: 12,
-          fontWeight: 200,
-          fontStyle: "italic",
+          fontWeight: 400,
+          fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
           textAnchor: "middle"
         }}
       >
@@ -101,7 +101,7 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
     );
   }
 
-  // markers
+  // markers - every 4th block
   for (var i = 0; i < blockCount; i = i + 4) {
     blocks.push(
       <rect
@@ -115,39 +115,41 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
   }
 
   return (
-    <div className="booking-status-bar col-md-4">
-      <svg className="booking-status-bar-bar" width={510}>
-        <pattern
-          id="verticalHatch"
-          width="3"
-          height="10"
-          patternTransform="rotate(0 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="10"
-            style={{ stroke: "#00b556", strokeWidth: 1 }}
-          />
-        </pattern>
+    <div>
+      <div className="booking-status-bar col-md-4">
+        <svg className="booking-status-bar-bar" width={510}>
+          <pattern
+            id="verticalHatch"
+            width="3"
+            height="10"
+            patternTransform="rotate(0 0 0)"
+            patternUnits="userSpaceOnUse"
+          >
+            <line
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="10"
+              style={{ stroke: "#00b556", strokeWidth: 1 }}
+            />
+          </pattern>
 
-        <pattern
-          id="diagonalHatch"
-          patternUnits="userSpaceOnUse"
-          width="4"
-          height="4"
-        >
-          <path
-            d="M-1,1 l2,-2
+          <pattern
+            id="diagonalHatch"
+            patternUnits="userSpaceOnUse"
+            width="4"
+            height="4"
+          >
+            <path
+              d="M-1,1 l2,-2
                M0,4 l4,-4
                M3,5 l2,-2"
-            style={{ stroke: "red", strokeWidth: 1 }}
-          />
-        </pattern>
-        {blocks}
-      </svg>
+              style={{ stroke: "red", strokeWidth: 1 }}
+            />
+          </pattern>
+          {blocks}
+        </svg>
+      </div>
     </div>
   );
 };
