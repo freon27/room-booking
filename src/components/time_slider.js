@@ -20,14 +20,16 @@ class TimeSlider extends React.Component {
     return (
       <div className="time-slider">
         <div className="time-slider-wrapper">
-          <BookingStatusBar selectedSlots={this.getSelectedRange()} />
+          <BookingStatusBar
+            availableSlots={this.props.availableSlots}
+            selectedSlots={this.getSelectedRange()}
+          />
           <ReactSlider
             defaultValue={[this.state.selectedStart, this.state.selectedEnd]}
             step={MIN_BOOKABLE_SLOT}
             minDistance={MIN_BOOKABLE_SLOT}
             min={BOOKABLE_START_TIME}
             max={BOOKABLE_END_TIME}
-            withBars
             className="time-slider-slider horizontal-slider"
             pearling={true}
             onChange={this.onChangeHandler.bind(this)}

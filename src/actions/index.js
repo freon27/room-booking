@@ -1,11 +1,15 @@
 import {
   FETCH_ROOM_LIST,
   FETCH_ROOM_LIST_SUCCESS,
-  FETCH_ROOM_LIST_FAILURE
+  FETCH_ROOM_LIST_FAILURE,
+  SHOW_BOOKING_FORM
 } from "./types";
 import axios from "axios";
+import { show } from "react-redux-bootstrap-modal";
 
 export const getRoomList = date => {
+  const unixTime = new Date(date).getTime() / 1000;
+
   return (dispatch, getState) => {
     dispatch({
       type: FETCH_ROOM_LIST
@@ -13,7 +17,7 @@ export const getRoomList = date => {
 
     axios
       .post("https://challenges.1aim.com/roombooking/getrooms", {
-        date: "today"
+        date: unixTime
       })
       .then(response => {
         dispatch({
@@ -29,3 +33,13 @@ export const getRoomList = date => {
       });
   };
 };
+
+export function showBookingForm(index) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SHOW_BOOKING_FORM,
+      payload: index
+    });
+    dispatch(show("my-modal", { title: "Form Booking" }));
+  };
+}

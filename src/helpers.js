@@ -18,3 +18,19 @@ export function timeRangeToSlots(startTime, endTime) {
   }
   return slots;
 }
+
+export function availableNow(room) {
+  // Room must be any time bewtween now and 1 hour from now
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+}
+
+export function getRoomSlots(room) {
+  let slots = [];
+  for (const rangeString of room.avail) {
+    const range = rangeString.split(" - ");
+    slots = slots.concat(timeRangeToSlots(range[0], range[1]));
+  }
+  return slots;
+}

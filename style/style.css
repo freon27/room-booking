@@ -46,7 +46,7 @@ body {
 
 /* Slider styling */
 .horizontal-slider {
-  width: 482px;
+  width: 385px;
   height: 20px;
 }
 .handle {
@@ -96,36 +96,142 @@ body {
   padding: 8px;
 }
 
-.room-filter form {
+.room-filter form,
+.date-picker form {
   border: 1px solid grey;
   background: rgba(255, 255, 255, 0.85);
   padding: 10px;
+}
+
+.date-picker input {
+  font-size: smaller;
 }
 
 .section-container {
   min-height: 500px;
 }
 
-.section-container th {
+.room-list-header {
   background-color: black;
-  color: white;
+  color: #ebebeb;
   font-weight: 300;
+  padding: 8px;
+  vertical-align: bottom;
 }
 
-.section-container table {
-  margin: 0;
-  background: rgba(255, 255, 255, 0.85);
+.room-list-header span {
+  padding: 2px;
 }
 
-td.numeric {
+.room-list-header #availability {
   text-align: center;
 }
 
-td.primary strong {
+.room-list .action-bar {
+  padding: 5px;
+}
+
+.room-list-data .extended-details {
+  padding-top: 20px;
+}
+
+.room-list-data .extended-details ul.equipment-list {
+  padding: 0;
+  list-style: none;
+}
+
+.room-list-data {
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid #ddd;
+}
+
+.room-list-data:hover {
+  background: rgb(248, 248, 248);
+}
+/*
+.section-container table {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.85);
+}*/
+
+.room-list .primary strong {
   color: #e40274;
 }
 
-td.booking-status {
+.room-list .booking-status {
   overflow-x: hidden;
   overflow-y: hidden;
+}
+
+.room-list.location {
+  color: #ddd;
+}
+
+#photos {
+  /* Prevent vertical gaps */
+  line-height: 0;
+  -webkit-column-count: 5;
+  -webkit-column-gap: 0px;
+  -moz-column-count: 5;
+  -moz-column-gap: 0px;
+  column-count: 1;
+  column-gap: 0px;
+}
+
+#photos img.main {
+  /* Just in case there are inline attributes */
+  width: auto !important;
+  height: 200px !important;
+  overflow: hidden;
+  display: block;
+}
+
+#photos img.tiny {
+  /* Just in case there are inline attributes */
+  width: auto !important;
+  height: 50px !important;
+  margin: 5px 5px 0 0;
+  display: inline-block;
+}
+
+.attendee-list ul {
+  list-style: none;
+  margin-top: 16px;
+  padding: 8px;
+  min-height: 196px;
+}
+
+.attendee-list li {
+  background-color: #ebfaff;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.room-booking .main-form {
+  margin-top: 20px;
+}
+
+button.flat-btn {
+  border: 0;
+  color: white;
+  padding: 6px 10px;
+  margin-right: 6px;
+}
+
+button.flat-btn-action {
+  background-color: #00a0db;
+}
+
+button.flat-btn-main-action {
+  background-color: #9abd36;
+}
+
+button.flat-btn-neutral {
+  background-color: #e40274;
+}
+
+.no-gutter > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
 }

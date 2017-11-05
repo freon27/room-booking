@@ -20,16 +20,28 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
   // Build initial block showing all as red
   for (var i = 0; i < blockCount; i++) {
     blocks.push(
-      <rect
-        x={i * BLOCK_WIDTH + BAR_PADDING}
-        y="20"
-        width={BLOCK_WIDTH}
-        height="15"
-        fill="#E31E2F"
-      />
+      <g>
+        <rect
+          x={i * BLOCK_WIDTH + BAR_PADDING}
+          y="20"
+          width={BLOCK_WIDTH}
+          height="15"
+          fill="#bbb"
+        />
+
+        <rect
+          x={i * BLOCK_WIDTH + BAR_PADDING}
+          y="20"
+          width={BLOCK_WIDTH}
+          height="15"
+          fill="url(#diagonalHatch)"
+        >
+          <title>Booked</title>
+        </rect>
+      </g>
     );
   }
-
+  /*
   for (var i = 0; i < blockCount; i++) {
     blocks.push(
       <rect
@@ -41,7 +53,7 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
       />
     );
   }
-
+*/
   // Display available times
   for (let availableSlot of availableSlots) {
     blocks.push(
@@ -51,16 +63,7 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
           y="20"
           width={BLOCK_WIDTH}
           height="15"
-          fill="#009547"
-        >
-          <title>Available</title>
-        </rect>
-        <rect
-          x={availableSlot * BLOCK_WIDTH + BAR_PADDING}
-          y="20"
-          width={BLOCK_WIDTH}
-          height="15"
-          fill="url(#verticalHatch)"
+          fill="#9ABD36"
         >
           <title>Available</title>
         </rect>
@@ -86,7 +89,7 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
     blocks.push(
       <text
         x={i * BLOCK_WIDTH * 4 + BAR_PADDING}
-        y="12"
+        y="13"
         fill="grey"
         style={{
           fontSize: 12,
@@ -117,7 +120,7 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
   return (
     <div>
       <div className="booking-status-bar col-md-4">
-        <svg className="booking-status-bar-bar" width={510}>
+        <svg className="booking-status-bar-bar" width={420}>
           <pattern
             id="verticalHatch"
             width="3"
@@ -144,7 +147,7 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
               d="M-1,1 l2,-2
                M0,4 l4,-4
                M3,5 l2,-2"
-              style={{ stroke: "red", strokeWidth: 1 }}
+              style={{ stroke: "#ddd", strokeWidth: 1 }}
             />
           </pattern>
           {blocks}

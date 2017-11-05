@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, actions } from "redux-form";
 
 export const initialState = {
   room_filter_name: "",
@@ -9,8 +9,10 @@ export const initialState = {
 
 class RoomFilter extends React.Component {
   render() {
+    const { handleSubmit, pristine, reset, submitting } = this.props;
+
     return (
-      <div className="room-filter col-md-2">
+      <div className="room-filter">
         <h4>
           <span className="glyphicon glyphicon-search" /> FILTER
         </h4>
@@ -46,6 +48,15 @@ class RoomFilter extends React.Component {
               Available now
             </label>
           </div>
+          <a
+            href="#"
+            onClick={ev => {
+              ev.preventDefault();
+              reset();
+            }}
+          >
+            clear filter
+          </a>
         </form>
       </div>
     );
