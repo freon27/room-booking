@@ -30,7 +30,11 @@ class RoomList extends React.Component {
 
     // filter on name
     let visibleRooms = roomList.filter(room => {
-      return room.name.indexOf(filter.room_filter_name) !== -1;
+      return (
+        `room ${room.name}`
+          .toLowerCase()
+          .indexOf(filter.room_filter_name.toLowerCase()) !== -1
+      );
     });
 
     // filter on capicity if selected

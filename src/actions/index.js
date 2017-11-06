@@ -66,14 +66,14 @@ export function bookRoom(data) {
           dispatch(destroy("my-modal"));
         } else {
           dispatch({
-            type: BOOK_ROOM_SUCCESS_FAILURE,
+            type: BOOK_ROOM_FAILURE,
             payload: err
           });
         }
       })
       .catch(err => {
         dispatch({
-          type: BOOK_ROOM_SUCCESS_FAILURE,
+          type: BOOK_ROOM_FAILURE,
           payload: err
         });
       });
