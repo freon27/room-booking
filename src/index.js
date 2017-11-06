@@ -8,6 +8,8 @@ import thunk from "redux-thunk";
 import App from "./components/app";
 import reducers from "./reducers";
 
+import "../style/style.css";
+
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, thunk)(
   createStore
 );
