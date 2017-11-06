@@ -8,7 +8,7 @@ import {
   BOOK_ROOM_FAILURE
 } from "./types";
 import { hide, destroy } from "redux-modal";
-
+import { getFormValues } from "redux-form";
 import axios from "axios";
 import { show } from "react-redux-bootstrap-modal";
 
@@ -63,6 +63,8 @@ export function bookRoom(data) {
             type: BOOK_ROOM_SUCCESS,
             payload: response
           });
+          const selectedDate = getFormValues("roomdate")(getState()).room_date;
+          dispatch(getRoomList(selectedDate));
           dispatch(destroy("my-modal"));
         } else {
           dispatch({

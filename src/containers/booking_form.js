@@ -143,6 +143,7 @@ class BookingForm extends React.Component {
                     ev.preventDefault();
                     this.book();
                   }}
+                  disabled={this.state.attendees.length === 0}
                   className="flat-btn flat-btn-main-action pull-right"
                 >
                   Book

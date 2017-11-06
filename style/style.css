@@ -220,6 +220,10 @@ button.flat-btn {
   margin-right: 6px;
 }
 
+button.flat-btn:disabled {
+  opacity: 0.3;
+}
+
 button.flat-btn-action {
   background-color: #00a0db;
 }

@@ -2,7 +2,10 @@ import {
   FETCH_ROOM_LIST,
   FETCH_ROOM_LIST_SUCCESS,
   FETCH_ROOM_LIST_FAILURE,
-  SHOW_BOOKING_FORM
+  SHOW_BOOKING_FORM,
+  BOOK_ROOM,
+  BOOK_ROOM_SUCCESS,
+  BOOK_ROOM_FAILURE
 } from "../actions/types";
 
 export default function(
@@ -23,6 +26,20 @@ export default function(
         isLoading: false
       };
       break;
+
+    case BOOK_ROOM:
+      return {
+        ...state,
+        isLoading: true
+      };
+      break;
+    case BOOK_ROOM_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+      break;
+
     case SHOW_BOOKING_FORM:
       return {
         ...state,
