@@ -3,15 +3,21 @@ import _ from "lodash";
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm, actions, getFormValues, isValid } from "redux-form";
+import * as myActions from "../actions/";
 
-import { getRoomSlots } from "../helpers";
+import {
+  getRoomSlots,
+  dateStringToUnixTime,
+  minutesAfterMidnightToUnix
+} from "../helpers";
 import TimeSlider from "../components/time_slider";
 import AttendeeList from "../components/attendee_list";
 
-export const initialValues = {
-  room_booking_name: "",
-  room_booking_email: "",
-  room_booking_phone: ""
+export const initialState = {
+  name: "",
+  email: "",
+  number: "",
+  room_booking_time: [420, 450]
 };
 
 const required = value => (value ? undefined : "Required");
@@ -37,11 +43,11 @@ const renderField = ({
       <input
         {...input}
         type="text"
-        component={renderField}
+        //component={renderField}
         name="room_booking_name"
         className={classNames}
         placeholder={placeholder}
-        validate={[required]}
+        //validate={[required]}
       />
       <span className="help-block">
         {touched &&
@@ -58,7 +64,6 @@ class BookingForm extends React.Component {
     super(props);
     this.state = { attendees: [] };
     this.addAttendee = this.addAttendee.bind(this);
-    this.setTimeRange = this.setTimeRange.bind(this);
   }
 
   render() {
@@ -67,7 +72,11 @@ class BookingForm extends React.Component {
       <div className="room-booking">
         <form>
           <div className="row">
-            <TimeSlider availableSlots={getRoomSlots(room)} />
+            <Field
+              availableSlots={getRoomSlots(room)}
+              component={TimeSlider}
+              name="room_booking_time"
+            />
           </div>
           <div className="row main-form">
             <div className="col-md-6">
@@ -76,7 +85,7 @@ class BookingForm extends React.Component {
                   type="text"
                   label="Name"
                   component={renderField}
-                  name="room_booking_name"
+                  name="name"
                   className="form-control"
                   placeholder="Attendee name...."
                   validate={[required]}
@@ -87,7 +96,7 @@ class BookingForm extends React.Component {
                   type="text"
                   label="Email"
                   component={renderField}
-                  name="room_booking_email"
+                  name="email"
                   className="form-control"
                   placeholder="Email address...."
                   validate={[required]}
@@ -98,7 +107,7 @@ class BookingForm extends React.Component {
                   type="text"
                   component={renderField}
                   label="Phone"
-                  name="room_booking_phone"
+                  name="number"
                   className="form-control"
                   placeholder="Phone number...."
                   validate={[required]}
@@ -127,6 +136,7 @@ class BookingForm extends React.Component {
                 <button
                   onClick={ev => {
                     ev.preventDefault();
+                    this.book();
                   }}
                   className="flat-btn flat-btn-main-action pull-right"
                 >
@@ -149,8 +159,6 @@ class BookingForm extends React.Component {
     }
   }
 
-  setTimeRange() {}
-
   removeAttendee(removeIndex) {
     this.setState({
       attendees: this.state.attendees.filter((v, index) => {
@@ -161,24 +169,40 @@ class BookingForm extends React.Component {
 
   book() {
     console.log(this.state.attendees);
-    console.log("");
-  }
-
-  setTimeRange(times) {
-    this.setState({ timeRange: times });
+    console.log(this.props.form);
+    this.props.bookRoom({
+      booking: {
+        date: dateStringToUnixTime(this.props.dateform.room_date),
+        //only the hour and minute of the time_ timestamps are used,
+        //the day is always determined by date
+        time_start: minutesAfterMidnightToUnix(
+          this.props.form.room_booking_time[0]
+        ),
+        time_end: minutesAfterMidnightToUnix(
+          this.props.form.room_booking_time[1]
+        ),
+        title: "event title",
+        description: "event description",
+        room: this.props.room.name
+      },
+      //information about all atendees
+      //all 3 fields are required
+      passes: this.state.attendees
+    });
   }
 }
 
 const mapStateToProps = state => ({
   room: state.booking.roomList[state.booking.bookingFormIndex],
   form: getFormValues("bookingform")(state),
-  formValid: isValid("bookingform")(state)
+  formValid: isValid("bookingform")(state),
+  dateform: getFormValues("roomdate")(state)
 });
 
-BookingForm = connect(mapStateToProps, null)(BookingForm);
+BookingForm = connect(mapStateToProps, myActions)(BookingForm);
 
 export default reduxForm({
   // a unique name for the form
-  //initialValues: initialState,
+  initialValues: initialState,
   form: "bookingform"
 })(BookingForm);

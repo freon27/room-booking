@@ -7,7 +7,7 @@ const AttendeeList = ({ attendees, removeAttendee }) => {
         {attendees &&
           attendees.map((attendee, index) => (
             <li>
-              <span>{attendee.room_booking_name}</span>
+              <span>{attendee.name}</span>
               <span
                 onClick={() => removeAttendee(index)}
                 className="glyphicon glyphicon-remove pull-right"

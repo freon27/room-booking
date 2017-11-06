@@ -177,6 +177,7 @@ body {
   -moz-column-gap: 0px;
   column-count: 1;
   column-gap: 0px;
+  overflow-x: hidden;
 }
 
 #photos img.main {

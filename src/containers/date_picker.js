@@ -10,7 +10,7 @@ const DatePicker = props => {
     <div className="date-picker">
       <form>
         <div className="form-group">
-          <label htmlFor="room_filter_name">Select date</label>
+          <label htmlFor="room_date">Select date</label>
 
           <Field
             type="date"

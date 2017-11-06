@@ -9,23 +9,17 @@ import {
 } from "../constants";
 
 class TimeSlider extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedStart: BOOKABLE_START_TIME,
-      selectedEnd: BOOKABLE_START_TIME + MIN_BOOKABLE_SLOT * 2
-    };
-  }
   render() {
+    const { onChange, input } = this.props;
     return (
       <div className="time-slider">
         <div className="time-slider-wrapper">
           <BookingStatusBar
             availableSlots={this.props.availableSlots}
-            selectedSlots={this.getSelectedRange()}
+            selectedSlots={this.getSelectedRange(input.value)}
           />
           <ReactSlider
-            defaultValue={[this.state.selectedStart, this.state.selectedEnd]}
+            defaultValue={input.value}
             step={MIN_BOOKABLE_SLOT}
             minDistance={MIN_BOOKABLE_SLOT}
             min={BOOKABLE_START_TIME}
@@ -43,19 +37,18 @@ class TimeSlider extends React.Component {
     return (minutes - BOOKABLE_START_TIME) / MIN_BOOKABLE_SLOT;
   }
 
-  getSelectedRange() {
+  getSelectedRange(values) {
     let range = [];
-    for (let i = this.state.selectedStart; i < this.state.selectedEnd; i++) {
+    const selectedStart = this.minutesToSlot(values[0]);
+    const selectedEnd = this.minutesToSlot(values[1]);
+    for (let i = selectedStart; i < selectedEnd; i++) {
       range.push(i);
     }
     return range;
   }
 
   onChangeHandler(values) {
-    this.setState({
-      selectedStart: this.minutesToSlot(values[0]),
-      selectedEnd: this.minutesToSlot(values[1])
-    });
+    this.props.input.onChange(values.slice());
   }
 }
 

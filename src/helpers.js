@@ -34,3 +34,15 @@ export function getRoomSlots(room) {
   }
   return slots;
 }
+
+export function dateStringToUnixTime(dateString) {
+  return new Date(dateString).getTime() / 1000;
+}
+
+export function minutesAfterMidnightToUnix(minutes) {
+  console.log(minutes);
+  const date = new Date();
+  date.setHours(minutes / 60, minutes % 60, 0, 0);
+  console.log(date);
+  return date.getTime() / 1000;
+}
