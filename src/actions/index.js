@@ -7,6 +7,8 @@ import {
   BOOK_ROOM_SUCCESS,
   BOOK_ROOM_FAILURE
 } from "./types";
+import { hide, destroy } from "redux-modal";
+
 import axios from "axios";
 import { show } from "react-redux-bootstrap-modal";
 
@@ -56,14 +58,22 @@ export function bookRoom(data) {
     axios
       .post("https://challenges.1aim.com/roombooking/sendpasses", data)
       .then(response => {
-        dispatch({
-          type: FETCH_ROOM_LIST_SUCCESS,
-          payload: response
-        });
+        if (response.data.success) {
+          dispatch({
+            type: BOOK_ROOM_SUCCESS,
+            payload: response
+          });
+          dispatch(destroy("my-modal"));
+        } else {
+          dispatch({
+            type: BOOK_ROOM_SUCCESS_FAILURE,
+            payload: err
+          });
+        }
       })
       .catch(err => {
         dispatch({
-          type: FETCH_ROOM_LIST_FAILURE,
+          type: BOOK_ROOM_SUCCESS_FAILURE,
           payload: err
         });
       });

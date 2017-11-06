@@ -11,7 +11,6 @@ import { ModalWrapper } from "react-redux-bootstrap-modal";
 
 class App extends Component {
   render() {
-    //<TimeSlider />
     return (
       <div className="row section-container">
         <h3>BOOKING</h3>

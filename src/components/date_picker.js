@@ -3,7 +3,6 @@ import BootstrapDatePicker from "react-bootstrap-date-picker";
 
 class WrappedDatePicker extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <BootstrapDatePicker
         dateFormat={this.props.dateFormat}
@@ -14,8 +13,6 @@ class WrappedDatePicker extends React.Component {
   }
 
   onChange(val, formattedVal) {
-    console.log("CH", this.props);
-    console.log("Val", formattedVal);
     this.props.input.onChange(formattedVal);
   }
 }

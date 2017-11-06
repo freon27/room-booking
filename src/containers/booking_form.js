@@ -4,6 +4,7 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm, actions, getFormValues, isValid } from "redux-form";
 import * as myActions from "../actions/";
+import { hide, destroy } from "redux-modal";
 
 import {
   getRoomSlots,
@@ -71,7 +72,7 @@ class BookingForm extends React.Component {
   }
 
   render() {
-    const { room, reset } = this.props;
+    const { room, reset, handleHide } = this.props;
     return (
       <div className="room-booking">
         <form>
@@ -146,6 +147,12 @@ class BookingForm extends React.Component {
                 >
                   Book
                 </button>
+                <button
+                  onClick={this.hideModal.bind(this)}
+                  className="flat-btn flat-btn-main-neutral pull-right"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
@@ -171,9 +178,12 @@ class BookingForm extends React.Component {
     });
   }
 
+  hideModal(ev) {
+    ev.preventDefault();
+    this.props.hide("my-modal");
+  }
+
   book() {
-    console.log(this.state.attendees);
-    console.log(this.props.form);
     this.props.bookRoom({
       booking: {
         date: dateStringToUnixTime(this.props.dateform.room_date),
@@ -203,7 +213,7 @@ const mapStateToProps = state => ({
   dateform: getFormValues("roomdate")(state)
 });
 
-BookingForm = connect(mapStateToProps, myActions)(BookingForm);
+BookingForm = connect(mapStateToProps, { ...myActions, hide })(BookingForm);
 
 export default reduxForm({
   // a unique name for the form

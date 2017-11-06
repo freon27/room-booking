@@ -24,8 +24,6 @@ class RoomList extends React.Component {
   filterRooms() {
     const { filter, roomList } = this.props;
 
-    console.log(this.props.date);
-
     if (!filter || !roomList) {
       return roomList;
     }
