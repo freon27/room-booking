@@ -17,6 +17,8 @@ const BookingStatusBar = ({ availableSlots, selectedSlots }) => {
   const BLOCK_WIDTH = 8;
   const BAR_PADDING = 15;
 
+  let key = 0;
+
   // Build initial block showing all as red
   for (var i = 0; i < blockCount; i++) {
     blocks.push(

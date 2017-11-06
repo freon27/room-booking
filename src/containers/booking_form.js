@@ -21,6 +21,10 @@ export const initialState = {
 };
 
 const required = value => (value ? undefined : "Required");
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? "Invalid email address"
+    : undefined;
 
 const renderField = ({
   input,
@@ -99,7 +103,7 @@ class BookingForm extends React.Component {
                   name="email"
                   className="form-control"
                   placeholder="Email address...."
-                  validate={[required]}
+                  validate={[required, email]}
                 />
               </div>
               <div className="form-group">

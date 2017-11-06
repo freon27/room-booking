@@ -5,7 +5,9 @@
   "main": "index.js",
   "repository": "git@github.com:StephenGrider/ReduxSimpleStarter.git",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+    "start": "node app.js",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
@@ -30,6 +32,7 @@
     "axios": "^0.17.0",
     "babel-preset-stage-1": "^6.1.18",
     "bootstrap": "^3.3.7",
+    "cross-env": "^5.1.1",
     "lodash": "^3.10.1",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
