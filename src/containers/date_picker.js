@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import WrappedDatePicker from "../components/date_picker";
 
 export const initialState = {
   room_date: new Date().toJSON().slice(0, 10)
@@ -13,11 +14,11 @@ const DatePicker = props => {
           <label htmlFor="room_date">Select date</label>
 
           <Field
-            type="date"
-            component="input"
+            component={WrappedDatePicker}
+            dateFormat="YYYY/MM/DD"
             name="room_date"
             className="form-control"
-            placeholder="Filter by name..."
+            placeholder="Select date"
           />
         </div>
       </form>

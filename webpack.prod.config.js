@@ -40,12 +40,11 @@ module.exports = {
         include: path.join(__dirname, "src", "styles")
       },
       {
-        test: /\.png$/,
-        loader: "file"
-      },
-      {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: "file"
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: "url-loader",
+        options: {
+          limit: 10000
+        }
       },
       { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
