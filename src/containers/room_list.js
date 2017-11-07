@@ -1,17 +1,14 @@
-import _ from "lodash";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import React from "react";
-import { connect } from "react-redux";
-import { getFormValues } from "redux-form";
-import { CSSTransitionGroup } from "react-transition-group"; // ES6
+import { connect } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
-import * as actions from "../actions/";
-import { BASE_ROOM_URL } from "../constants";
-import { timeRangeToSlots, getRoomSlots } from "../helpers";
+import * as actions from '../actions/';
+import { getRoomSlots } from '../helpers';
 
-import BookingStatusBar from "../components/booking_status_bar";
-import TimeSlider from "../components/time_slider";
-import ExtendedDetails from "../components/extended_details";
+import BookingStatusBar from '../components/booking_status_bar';
+import ExtendedDetails from '../components/extended_details';
 
 // TODO: extract into components
 
@@ -21,29 +18,22 @@ class RoomList extends React.Component {
     this.state = { expandedItemIndex: null };
   }
 
-  filterRooms() {
-    const { filter, roomList } = this.props;
+  componentDidMount() {
+    this.props.getRoomList(this.props.date);
+  }
 
-    if (!filter || !roomList) {
-      return roomList;
+  componentDidUpdate(prevProps) {
+    if (prevProps.date !== this.props.date) {
+      this.props.getRoomList(this.props.date);
     }
+  }
 
-    // filter on name
-    let visibleRooms = roomList.filter(room => {
-      return (
-        `room ${room.name}`
-          .toLowerCase()
-          .indexOf(filter.room_filter_name.toLowerCase()) !== -1
-      );
-    });
-
-    // filter on capicity if selected
-    if (filter.room_filter_attendees > 0) {
-      visibleRooms = visibleRooms.filter(room => {
-        return room.capacity >= filter.room_filter_attendees;
-      });
+  onExpandToggle(setIndex) {
+    if (setIndex === this.state.expandedItemIndex) {
+      this.setState({ expandedItemIndex: null });
+    } else {
+      this.setState({ expandedItemIndex: setIndex });
     }
-    return visibleRooms;
   }
 
   render() {
@@ -53,8 +43,8 @@ class RoomList extends React.Component {
       const roomExpanded = roomIndex === expandedItemIndex;
 
       const expandButtonIcon = roomExpanded
-        ? "flat-btn glyphicon glyphicon-chevron-up"
-        : "flat-btn glyphicon glyphicon-chevron-down";
+        ? 'flat-btn glyphicon glyphicon-chevron-up'
+        : 'flat-btn glyphicon glyphicon-chevron-down';
 
       return (
         <div>
@@ -66,7 +56,7 @@ class RoomList extends React.Component {
               <span className="primary col-md-2">
                 <strong>Room {room.name}</strong>
                 <div className="location">
-                  <span className="glyphicon glyphicon-map-marker" />{" "}
+                  <span className="glyphicon glyphicon-map-marker" />{' '}
                   {room.location}
                 </div>
               </span>
@@ -80,8 +70,8 @@ class RoomList extends React.Component {
                   onClick={() => this.onExpandToggle(roomIndex)}
                   className="flat-btn flat-btn-neutral"
                 >
-                  <span className={expandButtonIcon} />{" "}
-                  {roomExpanded ? "Hide" : "View"}
+                  <span className={expandButtonIcon} />{' '}
+                  {roomExpanded ? 'Hide' : 'View'}
                 </button>
                 <button
                   onClick={() => this.props.showBookingForm(roomIndex)}
@@ -110,12 +100,12 @@ class RoomList extends React.Component {
             </span>
             <span className="col-md-2" />
           </div>
-        </div>{" "}
+        </div>{' '}
         {roomElements}
         <div className="row">
           <p>
             <strong>
-              {roomElements.length} matching room{roomElements.length > 1 && "s"}{" "}
+              {roomElements.length} matching room{roomElements.length > 1 && 's'}{' '}
               found...
             </strong>
           </p>
@@ -124,29 +114,44 @@ class RoomList extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.props.getRoomList(this.props.date);
-  }
+  filterRooms() {
+    const { filter, roomList } = this.props;
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.date != this.props.date) {
-      this.props.getRoomList(this.props.date);
+    if (!filter || !roomList) {
+      return roomList;
     }
-  }
 
-  onExpandToggle(setIndex) {
-    if (setIndex === this.state.expandedItemIndex) {
-      this.setState({ expandedItemIndex: null });
-    } else {
-      this.setState({ expandedItemIndex: setIndex });
+    // filter on name
+    let visibleRooms = roomList.filter(room => {
+      return (
+        `room ${room.name}`
+          .toLowerCase()
+          .indexOf(filter.room_filter_name.toLowerCase()) !== -1
+      );
+    });
+
+    // filter on capicity if selected
+    if (filter.room_filter_attendees > 0) {
+      visibleRooms = visibleRooms.filter(room => {
+        return room.capacity >= filter.room_filter_attendees;
+      });
     }
+    return visibleRooms;
   }
 }
 
 const mapStateToProps = state => ({
   roomList: state.booking.roomList,
-  filter: getFormValues("roomfilter")(state),
-  date: getFormValues("roomdate")(state).room_date
+  filter: getFormValues('roomfilter')(state),
+  date: getFormValues('roomdate')(state).room_date,
 });
 
 export default connect(mapStateToProps, actions)(RoomList);
+
+RoomList.propTypes = {
+  getRoomList: PropTypes.function,
+  date: PropTypes.string,
+  showBookingForm: PropTypes.function,
+  filter: PropTypes.object,
+  roomList: PropTypes.array,
+};

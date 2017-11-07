@@ -1,12 +1,12 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import WrappedDatePicker from "../components/date_picker";
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import WrappedDatePicker from '../components/date_picker';
 
 export const initialState = {
-  room_date: new Date().toJSON().slice(0, 10)
+  room_date: new Date().toJSON().slice(0, 10),
 };
 
-const DatePicker = props => {
+const DatePicker = () => {
   return (
     <div className="date-picker">
       <form>
@@ -29,5 +29,5 @@ const DatePicker = props => {
 export default reduxForm({
   // a unique name for the form
   initialValues: initialState,
-  form: "roomdate"
+  form: 'roomdate',
 })(DatePicker);

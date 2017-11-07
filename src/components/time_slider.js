@@ -1,16 +1,32 @@
-import React from "react";
-import ReactSlider from "react-slider";
-import BookingStatusBar from "./booking_status_bar";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import ReactSlider from 'react-slider';
+import BookingStatusBar from './booking_status_bar';
 
 import {
   BOOKABLE_START_TIME,
   BOOKABLE_END_TIME,
-  MIN_BOOKABLE_SLOT
-} from "../constants";
+  MIN_BOOKABLE_SLOT,
+} from '../constants';
 
 class TimeSlider extends React.Component {
+  onChangeHandler(values) {
+    this.props.input.onChange(values.slice());
+  }
+
+  getSelectedRange(values) {
+    const range = [];
+    const selectedStart = this.minutesToSlot(values[0]);
+    const selectedEnd = this.minutesToSlot(values[1]);
+    for (let i = selectedStart; i < selectedEnd; i++) {
+      range.push(i);
+    }
+    return range;
+  }
+
   render() {
-    const { onChange, input } = this.props;
+    const { input } = this.props;
     return (
       <div className="time-slider">
         <div className="time-slider-wrapper">
@@ -25,7 +41,7 @@ class TimeSlider extends React.Component {
             min={BOOKABLE_START_TIME}
             max={BOOKABLE_END_TIME}
             className="time-slider-slider horizontal-slider"
-            pearling={true}
+            pearling
             onChange={this.onChangeHandler.bind(this)}
           />
         </div>
@@ -36,20 +52,12 @@ class TimeSlider extends React.Component {
   minutesToSlot(minutes) {
     return (minutes - BOOKABLE_START_TIME) / MIN_BOOKABLE_SLOT;
   }
-
-  getSelectedRange(values) {
-    let range = [];
-    const selectedStart = this.minutesToSlot(values[0]);
-    const selectedEnd = this.minutesToSlot(values[1]);
-    for (let i = selectedStart; i < selectedEnd; i++) {
-      range.push(i);
-    }
-    return range;
-  }
-
-  onChangeHandler(values) {
-    this.props.input.onChange(values.slice());
-  }
 }
 
 export default TimeSlider;
+
+TimeSlider.propTypes = {
+  input: PropTypes.object,
+  'input.onChange': PropTypes.function,
+  availableSlots: PropTypes.array,
+};

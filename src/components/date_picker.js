@@ -1,7 +1,12 @@
-import React from "react";
-import BootstrapDatePicker from "react-bootstrap-date-picker";
+import React from 'react';
+import PropTypes from 'prop-types';
+import BootstrapDatePicker from 'react-bootstrap-date-picker';
 
 class WrappedDatePicker extends React.Component {
+  onChange(val, formattedVal) {
+    this.props.input.onChange(formattedVal);
+  }
+
   render() {
     return (
       <BootstrapDatePicker
@@ -11,10 +16,12 @@ class WrappedDatePicker extends React.Component {
       />
     );
   }
-
-  onChange(val, formattedVal) {
-    this.props.input.onChange(formattedVal);
-  }
 }
 
 export default WrappedDatePicker;
+
+WrappedDatePicker.propTypes = {
+  'input.onChange': PropTypes.function,
+  input: PropTypes.object,
+  dateFormat: PropTypes.string,
+};

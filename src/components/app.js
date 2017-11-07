@@ -1,13 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-
-import TimeSlider from "./time_slider";
-import BookingStatusBar from "./booking_status_bar";
-import RoomList from "../containers/room_list";
-import RoomFilter from "../containers/room_filter";
-import DatePicker from "../containers/date_picker";
-import BookingForm from "../containers/booking_form";
-import { ModalWrapper } from "react-redux-bootstrap-modal";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import RoomList from '../containers/room_list';
+import RoomFilter from '../containers/room_filter';
+import DatePicker from '../containers/date_picker';
+import BookingForm from '../containers/booking_form';
+import { ModalWrapper } from 'react-redux-bootstrap-modal';
 
 class App extends Component {
   render() {
@@ -28,14 +25,10 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <ModalWrapper name="my-modal" component={BookingForm} />
+        <ModalWrapper component={BookingForm} name="my-modal" />
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null, null)(App);

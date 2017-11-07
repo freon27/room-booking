@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const AttendeeList = ({ attendees, removeAttendee }) => {
   return (
@@ -20,3 +21,8 @@ const AttendeeList = ({ attendees, removeAttendee }) => {
 };
 
 export default AttendeeList;
+
+AttendeeList.propTypes = {
+  attendees: PropTypes.array,
+  removeAttendee: PropTypes.function,
+};

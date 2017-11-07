@@ -1,15 +1,16 @@
-import React from "react";
-import { Field, reduxForm, actions } from "redux-form";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 
 export const initialState = {
-  room_filter_name: "",
-  room_filter_attendees: "",
-  room_filter_available_only: false
+  room_filter_name: '',
+  room_filter_attendees: '',
+  room_filter_available_only: false,
 };
 
 class RoomFilter extends React.Component {
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { reset } = this.props;
 
     return (
       <div className="room-filter">
@@ -44,7 +45,7 @@ class RoomFilter extends React.Component {
                 name="room_filter_available_only"
                 component="input"
                 type="checkbox"
-              />{" "}
+              />{' '}
               Available now
             </label>
           </div>
@@ -66,5 +67,9 @@ class RoomFilter extends React.Component {
 export default reduxForm({
   // a unique name for the form
   initialValues: initialState,
-  form: "roomfilter"
+  form: 'roomfilter',
 })(RoomFilter);
+
+RoomFilter.propTypes = {
+  reset: PropTypes.function,
+};

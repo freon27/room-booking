@@ -1,5 +1,7 @@
-import React from "react";
-import { BASE_ROOM_URL } from "../constants";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { BASE_ROOM_URL } from '../constants';
 
 const ExtendedDetails = ({ room }) => {
   return (
@@ -8,7 +10,7 @@ const ExtendedDetails = ({ room }) => {
         <h5>Photo Gallery - click to view</h5>
         {room.images.map((url, i) => (
           <img
-            className={i > 0 ? "tiny" : "main"}
+            className={i > 0 ? 'tiny' : 'main'}
             src={`${BASE_ROOM_URL}/${url}`}
           />
         ))}
@@ -18,7 +20,7 @@ const ExtendedDetails = ({ room }) => {
           <div className="col-md-5 col-md-offset-1 detail">
             <h5>Equipment available</h5>
             <ul className="equipment-list">
-              {room.equipment.map((item, index) => <li>{item}</li>)}
+              {room.equipment.map(item => <li>{item}</li>)}
             </ul>
           </div>
           <div className="col-md-5 col-md-offset-1">
@@ -32,3 +34,7 @@ const ExtendedDetails = ({ room }) => {
 };
 
 export default ExtendedDetails;
+
+ExtendedDetails.propTypes = {
+  room: PropTypes.object,
+};
