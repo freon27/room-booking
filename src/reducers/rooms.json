@@ -1,0 +1,105 @@
+[
+    {
+        "name": "2.8",
+        "location": "Floor 2",
+        "equipment": [
+            "50\u0022 Flatscreen",
+            "Hi-Fi System",
+            "Interactive Whiteboard",
+            "Projector"
+        ],
+        "size": "100m\u00b2",
+        "capacity": 28,
+        "avail": [
+            "07:00 - 07:15",
+            "08:00 - 09:30",
+            "12:30 - 19:00"
+        ],
+        "images": [
+            "assets\/images\/img01.jpg",
+            "assets\/images\/img05.jpg",
+            "assets\/images\/img03.jpg"
+        ]
+    },
+    {
+        "name": "4.6",
+        "location": "Floor 4",
+        "equipment": [
+            "Big Lego Set",
+            "50\u0022 Flatscreen",
+            "Fridge with Softdrinks"
+        ],
+        "size": "55m\u00b2",
+        "capacity": 20,
+        "avail": [
+            "07:00 - 10:15",
+            "12:45 - 15:00",
+            "17:45 - 19:00"
+        ],
+        "images": [
+            "assets\/images\/img01.jpg",
+            "assets\/images\/img02.jpg",
+            "assets\/images\/img04.jpg"
+        ]
+    },
+    {
+        "name": "3.7",
+        "location": "Floor 3",
+        "equipment": [
+            "Hi-Fi System",
+            "Big Lego Set",
+            "2 Laptops"
+        ],
+        "size": "25m\u00b2",
+        "capacity": 7,
+        "avail": [
+            "07:00 - 10:30",
+            "13:00 - 15:45",
+            "16:45 - 17:30",
+            "18:45 - 19:00"
+        ],
+        "images": [
+            "assets\/images\/img05.jpg",
+            "assets\/images\/img06.jpg"
+        ]
+    },
+    {
+        "name": "2.9",
+        "location": "Floor 2",
+        "equipment": [
+            "Interactive Whiteboard",
+            "Big Lego Set",
+            "Projector"
+        ],
+        "size": "65m\u00b2",
+        "capacity": 18,
+        "avail": [
+            "07:00 - 19:00"
+        ],
+        "images": [
+            "assets\/images\/img03.jpg",
+            "assets\/images\/img06.jpg",
+            "assets\/images\/img01.jpg"
+        ]
+    },
+    {
+        "name": "4.11",
+        "location": "Floor 4",
+        "equipment": [
+            "Laptop",
+            "Fridge with Softdrinks",
+            "50\u0022 Flatscreen",
+            "Hi-Fi System"
+        ],
+        "size": "115m\u00b2",
+        "capacity": 32,
+        "avail": [
+            "07:00 - 19:00"
+        ],
+        "images": [
+            "assets\/images\/img01.jpg",
+            "assets\/images\/img06.jpg",
+            "assets\/images\/img04.jpg"
+        ]
+    }
+]
