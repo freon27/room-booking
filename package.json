@@ -27,7 +27,7 @@
     "eslint-plugin-react": "^7.4.0",
     "file-loader": "^1.1.5",
     "jquery": "^2.2.1",
-    "jsdom": "^8.1.0",
+    "jsdom": "^16.5.0",
     "jshint": "^2.10.0",
     "jshint-loader": "^0.8.4",
     "mocha": "^2.4.5",
